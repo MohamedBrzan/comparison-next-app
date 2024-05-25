@@ -18,18 +18,15 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-interface User {
-  name: string;
-  email: string;
-}
+
 
 export async function GET() {
-  revalidatePath("/all");
-  redirect("/all");
+  revalidatePath("/products");
+  redirect("/products");
 }
 
-const getData = async function (): Promise<User[]> {
-  const res = await fetch(`http://localhost:4000/users/all`, {
+const getData = async function () {
+  const res = await fetch("https://dummyjson.com/products", {
     // next: { revalidate: 3600 },
     cache: "no-store",
   });
@@ -40,16 +37,16 @@ const getData = async function (): Promise<User[]> {
 };
 
 export default async function Page() {
-  const data = await getData();
+  const { products } = await getData();
 
   return (
     <section>
       <h1>Data is</h1>
       <div>
-        {data?.map(
-          ({ name, email }: { name: string; email: string }, i: number) => (
+        {products!.map(
+          ({ id, title }: { id: number; title: string }, i: number) => (
             <div key={i}>
-              {name} - {email}
+              {id} - {title}
             </div>
           )
         )}

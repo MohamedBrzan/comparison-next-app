@@ -13,10 +13,10 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex flex-row gap-4">
-      <div className="p-4 w-[300px] bg-gradient-to-bl  from-indigo-900 h-[80vh] rounded-r-md">
-        <h1 className="text-3xl">Dashboard Routes</h1>
+      <div className="p-4 w-[300px] bg-gradient-to-br from-slate-900 to-blue-900">
+        <h1 className="text-2xl text-orange-500"><strong>Dashboard Routes</strong></h1>
         {DashboardRoutes.map(({ path, title }, i) => (
-          <Link href={path} key={i} className="block">
+          <Link href={path} key={i} className="block text-white">
             {title}
           </Link>
         ))}
