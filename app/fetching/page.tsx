@@ -15,10 +15,10 @@
 //   return res.json();
 // })
 
+import { Card } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-
+import { Suspense } from "react";
 
 export async function GET() {
   revalidatePath("/products");
@@ -42,14 +42,16 @@ export default async function Page() {
   return (
     <section>
       <h1>Data is</h1>
-      <div>
-        {products!.map(
-          ({ id, title }: { id: number; title: string }, i: number) => (
-            <div key={i}>
-              {id} - {title}
-            </div>
-          )
-        )}
+      <div className="flex flex-row flex-wrap">
+        <Suspense fallback={<h1>loading...</h1>}>
+          {products!.map(
+            ({ id, title }: { id: number; title: string }, i: number) => (
+              <Card key={i} className="p-4 bg-black text-white">
+                {id} - {title}
+              </Card>
+            )
+          )}
+        </Suspense>
       </div>
     </section>
   );
