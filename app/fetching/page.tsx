@@ -41,8 +41,8 @@ export default async function Page() {
 
   return (
     <section>
-      <h1>Data is</h1>
-      <div className="flex flex-row flex-wrap">
+      <h1 className="text-center text-2xl md:text-5xl mb-5">Online Data</h1>
+      <div className="flex flex-row flex-wrap mb-5">
         <Suspense fallback={<h1>loading...</h1>}>
           {products!.map(
             ({ id, title }: { id: number; title: string }, i: number) => (
